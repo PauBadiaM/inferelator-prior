@@ -11,18 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Conda
-      uses: conda-incubator/setup-miniconda@v2
+      uses: conda-incubator/setup-miniconda@v3
       with:
-        environment-file: test-environment.yml
-        activate-environment: test_inferelator_prior
-        auto-activate-base: false
-    - name: Conda Info
+        miniforge-version: latest
+        python-version: ${{ matrix.python-version }}
+    - name: Conda Config
       shell: bash -l {0}
       run: |
+        conda config --add channels bioconda
+        conda install -c bioconda meme samtools sra-tools star homer htslib bedtools
         conda info
         conda list
         conda env list
@@ -40,4 +43,4 @@ jobs:
         python -m coverage run -m pytest
         python -m coverage xml
     - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v4
