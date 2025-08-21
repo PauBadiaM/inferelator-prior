@@ -518,8 +518,6 @@ def build_motif_prior_from_genes(
         motif_constraint_info=motif_info,
         shuffle=shuffle,
     )
-    if gene_constraint_list is not None:
-    motif_information = motif_information[motif_information[MOTIF_NAME_COL].isin(regulator_constraint_list)]
 
     # SCAN CHROMATIN FOR MOTIFS AND SCORE HITS ################################
     # Load and scan target chromatin peaks
