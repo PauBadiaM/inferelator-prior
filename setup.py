@@ -13,7 +13,7 @@ install_requires = [
     "inferelator"
 ]
 tests_require = ["coverage", "pytest", "pysam"]
-version = "0.4.0"
+version = "0.4.1"
 
 # Description from README.md
 base_dir = os.path.dirname(os.path.abspath(__file__))
