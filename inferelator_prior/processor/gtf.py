@@ -365,9 +365,10 @@ def check_chromosomes_match(
     if len(_joint_match) != len(_left_chr):
 
         _names_miss = _left_chr.symmetric_difference(_right_chr)
-
+        if not isinstance(file_name, str):
+            file_name = file_name.fn
         print(
-            f"File {file_name.fn}: " if file_name is not None else ""
+            f"File {file_name}: " if file_name is not None else ""
             f"Chromosomes do not match; the following "
             f"{len(_names_miss)} chromosomes will not map correctly: "
             f"{list(_names_miss)}"
