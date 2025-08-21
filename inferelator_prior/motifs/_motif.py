@@ -351,7 +351,7 @@ class MotifScanner:
 
     @staticmethod
     def extract_genome(genome_fasta_file, constraint_bed_file=None, promoter_bed=None,
-                       valid_fasta_chromosomes=None, debug=False):
+                       valid_fasta_chromosomes=None, debug=False, return_bed=False):
 
         if valid_fasta_chromosomes is None:
             _chr_lens = get_fasta_lengths(genome_fasta_file)
@@ -386,7 +386,10 @@ class MotifScanner:
             return extracted_fasta_file
 
         extracted_fasta_file = extract_bed_sequence(bed_file, genome_fasta_file)
-        return extracted_fasta_file
+        if return_bed:
+            return extracted_fasta_file, bed_file
+        else:
+            return extracted_fasta_file
 
     def _scan_extract(self, motif_files, extracted_fasta_file, threshold=None, parse_genomic_coord=True):
         # If the number of workers is 1, run fimo directly
